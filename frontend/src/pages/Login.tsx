@@ -43,7 +43,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
           </div>
           <div>
             <p className="text-sm font-bold tracking-tight">Go Source</p>
-            <p className="mt-0.5 text-[9px] font-semibold tracking-[0.16em] text-teal-100/70">VISA OPERATIONS</p>
+            <p className="mt-0.5 text-[9px] font-semibold tracking-[0.16em] text-teal-100/70">Placement Services</p>
           </div>
         </div>
 
