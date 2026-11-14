@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: visa-crm-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: visa_crm
+    ports:
+      - '3307:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: visa-crm-api
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_URL: mysql://root:password@mysql:3306/visa_crm
+      JWT_SECRET: change-this-in-production
+      COOKIE_SECRET: change-this-in-production
+      NODE_ENV: production
+      PORT: 3000
+      CORS_ORIGIN: http://localhost:5173
+    depends_on:
+      - mysql
+    volumes:
+      - uploads:/app/backend/storage/uploads
+
+volumes:
+  mysql_data:
+  uploads:

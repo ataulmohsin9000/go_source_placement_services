@@ -651,7 +651,13 @@ Browser (React/Vite) → HTTPS reverse proxy → Node API → authentication/aut
 
 #### **8.3 Suggested repository structure** 
 
-visa-crm/ apps/ web/                 # React + Vite + Tailwind api/                 # Node.js + TypeScript API worker/              # background jobs (can begin inside API process) packages/ shared/              # shared types and schemas ui/                  # reusable components prisma/ or database/ schema/ migrations/ seed/ storage/               # private local storage; outside public root docs/                  # PRD, setup, API, security, user manual docker-compose.yml .env.example 
+project-root/
+├── backend/              # Node.js + TypeScript API, Prisma schema and seeds
+├── frontend/             # React + Vite + Tailwind web app
+├── docker-compose.yml
+├── .env.example
+├── README.md
+└── Visa_Services_CRM_PRD_v1.md
 
 README.md 
 
