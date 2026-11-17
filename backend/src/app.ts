@@ -22,7 +22,11 @@ export const app = express();
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+    origin: [
+      'http://localhost:5173',
+      process.env.FRONTEND_URL,
+      process.env.CORS_ORIGIN,
+    ].filter((origin): origin is string => Boolean(origin)),
     credentials: true,
   })
 );

@@ -5,8 +5,10 @@ import app from './app';
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`🚀 Visa Services CRM API running on http://localhost:${PORT}`);
-  console.log(`📡 Health endpoint: http://localhost:${PORT}/health`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Visa Services CRM API running on http://localhost:${PORT}`);
+    console.log(`📡 Health endpoint: http://localhost:${PORT}/health`);
+  });
+}
 
