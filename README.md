@@ -73,6 +73,20 @@ The combined command `npm run dev` starts both apps together.
 docker compose up -d
 ```
 
+## Deploying to Vercel with MySQL
+
+Use a managed MySQL 8-compatible database reachable from Vercel. Set these backend environment variables in the Vercel project:
+
+- `DATABASE_URL`: `mysql://USER:PASSWORD@HOST:PORT/DATABASE` (URL-encode special characters in credentials)
+- `JWT_SECRET`: a strong, unique secret
+- `COOKIE_SECRET`: a strong, unique secret
+- `FRONTEND_URL`: the deployed frontend origin, such as `https://your-frontend.vercel.app`
+- `NODE_ENV`: `production`
+
+Keep credentials out of Git. The backend generates Prisma Client during install and exports its Express app for Vercel. The frontend calls `/api/v1`, which is routed to the backend by `vercel.json`; a separate `VITE_API_URL` is not needed for this setup.
+
+Before deploying against a new MySQL database, apply the checked-in migrations from the repository root with `npm run db:migrate:deploy` while `DATABASE_URL` points to that database. This applies migrations and does not create or provision the database itself.
+
 ## Project Structure
 
 ```
