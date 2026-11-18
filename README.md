@@ -83,7 +83,7 @@ Use a managed MySQL 8-compatible database reachable from Vercel. Set these backe
 - `FRONTEND_URL`: the deployed frontend origin, such as `https://your-frontend.vercel.app`
 - `NODE_ENV`: `production`
 
-Keep credentials out of Git. The backend generates Prisma Client during install and exports its Express app for Vercel. The frontend calls `/api/v1`, which is routed to the backend by `vercel.json`; a separate `VITE_API_URL` is not needed for this setup.
+Keep credentials out of Git. The backend generates Prisma Client during install and exports its Express app for Vercel. If the frontend and backend are deployed as separate Vercel projects, set `VITE_API_URL` in the frontend project to the backend's production origin (for example, `https://your-backend.vercel.app`) and redeploy the frontend. The frontend adds `/api/v1` automatically; you can also provide the full API base URL. If both services share one Vercel deployment with the `vercel.json` rewrites, leave `VITE_API_URL` unset and the relative `/api/v1` path will be routed to the backend.
 
 Before deploying against a new MySQL database, apply the checked-in migrations from the repository root with `npm run db:migrate:deploy` while `DATABASE_URL` points to that database. This applies migrations and does not create or provision the database itself.
 
